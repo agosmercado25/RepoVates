@@ -1,0 +1,9 @@
+/.settings/
+/target/
+/test-output/
+.classpath
+.project
+<<<<<<< HEAD
+/.git/
+=======
+>>>>>>> 05a5e18b959ae26555b861bf15b07d97a4eaab8e
