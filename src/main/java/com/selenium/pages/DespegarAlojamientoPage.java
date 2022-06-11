@@ -57,7 +57,8 @@ public class DespegarAlojamientoPage {
 		Thread.sleep(1000);
 		ciudad.sendKeys(Keys.CONTROL);
 		wait.until(ExpectedConditions.elementToBeClickable(modalCiudad));
-		ciudad.sendKeys(Keys.ENTER);		
+		ciudad.sendKeys(Keys.ENTER);
+		Thread.sleep(1000);
 	}
 	
 	public void ingresarFechaEntrada() throws Exception{
@@ -65,7 +66,7 @@ public class DespegarAlojamientoPage {
 		calendarioEntrada.click();
 		wait.until(ExpectedConditions.elementToBeClickable(fechaIngreso));
 		fechaIngreso.click();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 	}
 	
 	public void ingresarFechaSalida() throws Exception{
@@ -75,9 +76,8 @@ public class DespegarAlojamientoPage {
 		wait.until(ExpectedConditions.visibilityOfAllElements(fechaSalida));
 		fechaSalida.click();
 		wait.until(ExpectedConditions.elementToBeClickable(btnApply));
-		Thread.sleep(5000);
 		btnApply.click();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 	}
 	
 	public void cantidadViajeros() throws Exception{
@@ -91,7 +91,7 @@ public class DespegarAlojamientoPage {
 		edadNiño.click();
 		wait.until(ExpectedConditions.elementToBeClickable(btnApply2));
 		btnApply2.click();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 	}
 	
 	public WebDriverWait wait(WebElement locator) {
@@ -105,7 +105,7 @@ public class DespegarAlojamientoPage {
 		cantidadViajeros();
 		wait.until(ExpectedConditions.elementToBeClickable(btnBuscar));
 		btnBuscar.click();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		return new DespegarBuscarPage(driver);
 	}
 

@@ -3,6 +3,11 @@
 <suite name="Suite">
 <parameter name="Navegador" value="EDGE"></parameter>
   <test thread-count="5" name="Test">
+  	<groups>
+  		<run>
+  			<include name="grupo2"></include>
+  		</run>	
+  	</groups>
     <classes>
       <class name="com.selenium.test.DespegarTests1"/>
     </classes>

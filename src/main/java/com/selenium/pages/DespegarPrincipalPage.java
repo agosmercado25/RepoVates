@@ -17,8 +17,8 @@ public class DespegarPrincipalPage {
 	@FindBy(css = "a.lgpd-banner--button")
 	private WebElement cookies;
 	  
-//	@FindBy(xpath = "//i[@class='login-incentive--close shifu-3-icon-close -eva-3-mr-md']")
-//	private WebElement btnIniciarSesion;
+	@FindBy(css = ".login-incentive .shifu-3-icon-close")
+	private WebElement login;
 	  
 	@FindBy(css = ".header-products-container [href='//www.despegar.com.ar/hoteles/']")
 	private WebElement alojamiento;
@@ -36,7 +36,7 @@ public class DespegarPrincipalPage {
 	public DespegarAlojamientoPage iraAlojamiento() {
 		wait.until(ExpectedConditions.elementToBeClickable(alojamiento));
 		Assert.assertTrue(alojamiento.isDisplayed(),"Error! No accede a la pagina");
-//		btnIniciarSesion.click();
+		login.click();
 		wait.until(ExpectedConditions.elementToBeClickable(cookies));
 		cookies.click();
 		alojamiento.click();
