@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,82 +9,104 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DespegarAlojamientoPage {
-	@FindBy(css = ".ac-container .item-text")
-	WebElement destino;
+	private WebDriver driver = null;
+	private WebDriverWait wait = null;
+	
 	@FindBy(css = "div.input-container>input[placeholder='Ingresá una ciudad, alojamiento o punto de interés'")
 	WebElement ciudad;
+	@FindBy(css = "div.ac-wrapper.-show>div>div>ul>li")
+	private WebElement modalCiudad;
 	
 	@FindBy(css = ".input-container .input-tag[placeholder='Entrada']")
-	WebElement calendarioEntrada;
-	@FindBy(xpath = "//div[@class='sbox5-floating-tooltip sbox5-floating-tooltip-opened']//div[@data-month='2022-06'] //div[@class='sbox5-monthgrid-datenumber']//div [text()='15']")
-	WebElement fechaEntrada;
+	private WebElement calendarioEntrada;
+	@FindBy(css = "div.sbox5-floating-tooltip-opened div.calendar-container div.-today")
+	private WebElement fechaIngreso;
 	
 	@FindBy(css = ".input-container .input-tag[placeholder='Salida']")
-	WebElement calendarioSalida;
-	@FindBy(xpath = "//div[@class='sbox5-floating-tooltip sbox5-floating-tooltip-opened']//div[@data-month='2022-06'] //div[@class='sbox5-monthgrid-datenumber sbox5-monthgrid-datenumber-20']")
-	WebElement fechaSalida;
+	private WebElement calendarioSalida;
+	@FindBy(css="div.sbox5-floating-tooltip.sbox5-floating-tooltip-opened div.sbox5-3-floating-tooltip-datepicker-wrapper.sbox5-compact-view div.calendar-container > div.sbox5-monthgrid.sbox5-compact-view:nth-child(3) div.sbox5-monthgrid-datenumber.sbox5-monthgrid-datenumber-28")
+	private WebElement fechaSalida;
 	
-	@FindBy(css = ".sbox5-floating-tooltip-opened .calendar-footer .btn-text")
-	WebElement btnApply;
+	@FindBy(css = "div.sbox5-floating-tooltip-opened div.calendar-footer em.btn-text")
+	private WebElement btnApply;
 	
 	@FindBy(css = ".sbox5-box-distributionPassengers-ovr")
-	WebElement habitaciones;
+	private WebElement habitaciones;
 	@FindBy(css = ".stepper__room .stepper__room__row:nth-child(1) .steppers-icon-right")
-	WebElement cantAdultos;
+	private WebElement cantAdultos;
 	@FindBy(css = ".stepper__room .stepper__room__row:nth-child(2) .steppers-icon-right")
-	WebElement cantNiños;
+	private WebElement cantNiños;
 	@FindBy(css = ".select-option[value='5']")
-	WebElement edadNiño;
+	private WebElement edadNiño;
 	@FindBy(css = "div.sbox5-floating-tooltip-opened div.stepper__room__footer>a:nth-child(1)")
-	WebElement btnApply2;
+	private WebElement btnApply2;
 	
 	@FindBy(css = "div.sbox5-box-container div.sbox5-box-content button.sbox5-box-button-ovr.sbox5-3-btn.-secondary.-icon.-lg > em.btn-text")
-	WebElement btnBuscar;
-
-	@FindBy(css = ".login-incentive .shifu-3-icon-close")
-	WebElement loginInteractiv;
-	private WebDriver driver = null;
+	private WebElement btnBuscar;
 
 	public DespegarAlojamientoPage(WebDriver driver) {
 		this.driver = driver;
+		this.wait = new WebDriverWait(driver, 5);
 		PageFactory.initElements(driver, this);
 	}
-
+	
+	public void ingresarCiudad(String txt) throws Exception {
+		wait.until(ExpectedConditions.elementToBeClickable(ciudad));
+		ciudad.click();
+		ciudad.sendKeys(txt);
+		Thread.sleep(1000);
+		ciudad.sendKeys(Keys.CONTROL);
+		wait.until(ExpectedConditions.elementToBeClickable(modalCiudad));
+		ciudad.sendKeys(Keys.ENTER);		
+	}
+	
+	public void ingresarFechaEntrada() throws Exception{
+		wait.until(ExpectedConditions.elementToBeClickable(calendarioEntrada));
+		calendarioEntrada.click();
+		wait.until(ExpectedConditions.elementToBeClickable(fechaIngreso));
+		fechaIngreso.click();
+		Thread.sleep(3000);
+	}
+	
+	public void ingresarFechaSalida() throws Exception{
+		wait.until(ExpectedConditions.elementToBeClickable(calendarioSalida));
+		calendarioSalida.click();
+		wait.until(ExpectedConditions.elementToBeClickable(fechaSalida));
+		wait.until(ExpectedConditions.visibilityOfAllElements(fechaSalida));
+		fechaSalida.click();
+		wait.until(ExpectedConditions.elementToBeClickable(btnApply));
+		Thread.sleep(5000);
+		btnApply.click();
+		Thread.sleep(3000);
+	}
+	
+	public void cantidadViajeros() throws Exception{
+		wait.until(ExpectedConditions.elementToBeClickable(habitaciones));
+		habitaciones.click();
+		wait.until(ExpectedConditions.elementToBeClickable(cantAdultos));
+		cantAdultos.click();
+		wait.until(ExpectedConditions.elementToBeClickable(cantNiños));
+		cantNiños.click();
+		wait.until(ExpectedConditions.elementToBeClickable(edadNiño));
+		edadNiño.click();
+		wait.until(ExpectedConditions.elementToBeClickable(btnApply2));
+		btnApply2.click();
+		Thread.sleep(3000);
+	}
+	
 	public WebDriverWait wait(WebElement locator) {
 		return this.wait(locator);
 	}
 
-	public DespegarBuscarPage alojamiento(String ciudad) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		driver.manage().window().maximize();
-		loginInteractiv.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sbox5-box-places-ovr .input-container")));
-		this.ciudad.click();
-		this.ciudad.sendKeys(ciudad);
-		this.ciudad.sendKeys(Keys.CONTROL);
-		this.ciudad.sendKeys(Keys.ENTER);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ac-container .item-text")));
-		destino.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"sbox5-box-dates-checkbox-container\"]//div[@class=\"sbox5-dates-input1\"]")));
-		calendarioEntrada.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='sbox5-floating-tooltip sbox5-floating-tooltip-opened']//*[@class='sbox5-monthgrid' or @class='sbox5-monthgrid sbox5-compact-view'][@data-month='2022-03']//*[@class='sbox5-monthgrid-datenumber-number'][text()='10']")));
-		fechaEntrada.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"sbox5-box-dates-checkbox-container\"]//div[@class=\"sbox5-dates-input2-container\"]")));
-		calendarioSalida.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='sbox5-floating-tooltip sbox5-floating-tooltip-opened']//*[@class='sbox5-monthgrid' or @class='sbox5-monthgrid sbox5-compact-view'][@data-month='2022-03']//*[@class='sbox5-monthgrid-datenumber-number'][text()='14']")));
-		fechaSalida.click();
-		btnApply.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sbox5-box-distributionPassengers-ovr")));
-		habitaciones.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".stepper__room .stepper__room__row:nth-child(1) .steppers-icon-right")));
-		cantAdultos.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".stepper__room .stepper__room__row:nth-child(2) .steppers-icon-right")));
-		cantNiños.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".select-option[value='5']")));
-		edadNiño.click();
-		btnApply2.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.sbox5-box-container div.sbox5-box-content button.sbox5-box-button-ovr.sbox5-3-btn.-secondary.-icon.-lg > em.btn-text")));
+	public DespegarBuscarPage alojamiento(String lugar) throws Exception {
+		ingresarCiudad(lugar);
+		ingresarFechaEntrada();
+		ingresarFechaSalida();
+		cantidadViajeros();
+		wait.until(ExpectedConditions.elementToBeClickable(btnBuscar));
 		btnBuscar.click();
+		Thread.sleep(3000);
 		return new DespegarBuscarPage(driver);
 	}
+
 }

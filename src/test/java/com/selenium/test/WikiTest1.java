@@ -2,8 +2,8 @@ package com.selenium.test;
 
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import com.selenium.driver.DriverFactory;
@@ -13,9 +13,10 @@ public class WikiTest1 {
 	private WebDriver navegador = null;
 
 	@BeforeClass(alwaysRun=true)
-	public void NavegadorTest() throws Exception {
-		WebDriver navegador = DriverFactory.LevantarBrowser(null, "EDGE", "https://www.wikipedia.com.ar/");
-		WebDriverWait wait = new WebDriverWait(navegador, 5);
+	public void NavegadorTest(ITestContext context) throws Exception {
+		String navegadorTestSuite = context.getCurrentXmlTest().getParameter("Navegador");
+		String navegadorSuite = navegadorTestSuite != null ? navegadorTestSuite : "EDGE";
+		navegador = DriverFactory.LevantarBrowser(null, navegadorSuite, "https://www.wikipedia.com.ar/");
 	}
 
 	@Test

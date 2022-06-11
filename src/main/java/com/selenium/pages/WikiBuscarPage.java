@@ -7,9 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WikiBuscarPage {
 	@FindBy(id = "firstHeading")
-	WebElement titulo;
+	private WebElement titulo;
+	private WebDriver driver = null;
 
 	public WikiBuscarPage(WebDriver driver) {
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

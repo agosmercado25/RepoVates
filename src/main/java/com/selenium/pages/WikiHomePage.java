@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +19,7 @@ public class WikiHomePage {
 	private WebElement txtCajaBusqueda;
 	
 	public void IngresarDatoCajaBusqueda (String dato) {
-		Reporter.log("Localizar y comprobar que la caja de bsuqueda se muestra");
+		Reporter.log("Localizar y comprobar que la caja de busqueda se muestra");
 		Assert.assertTrue((txtCajaBusqueda.isDisplayed()), "La caja no se visualiza");
 		Reporter.log("Ingresar la palabra Selenium");
 		txtCajaBusqueda.sendKeys(dato);

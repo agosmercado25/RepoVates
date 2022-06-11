@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class WikiPrincipalPage {
 
 	@FindBy(id = "searchInput")
-	WebElement searchInput;
+	private WebElement searchInput;
 	 
 	private WebDriver driver = null;
 
@@ -20,7 +20,7 @@ public class WikiPrincipalPage {
 	public boolean searchInputesVisible() {
 		return this.searchInput.isDisplayed();
 	}
-
+	
 	public WikiBuscarPage searchInput(String text) {
 		this.searchInput.sendKeys(text);
 		searchInput.submit();

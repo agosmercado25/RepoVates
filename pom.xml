@@ -69,7 +69,7 @@
 				<configuration>
 					<suiteXmlFiles>
 					<!--suppress UnresolverMavenProperty -->
-						<suiteXmlFile>TestSuites/testng.xml</suiteXmlFile>
+						<suiteXmlFile>TestSuites/${suite}</suiteXmlFile>
 					</suiteXmlFiles> 
 				</configuration>
 			</plugin>

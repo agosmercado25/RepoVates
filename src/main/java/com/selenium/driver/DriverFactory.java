@@ -16,7 +16,7 @@ public class DriverFactory {
 	  switch (browsers.valueOf(browserName)) {
 	  case CHROME:
 	  {
-		  System.setProperty("webdriver.chrome.driver", "D:/Instalaciones/chromedriver_win32/chromedriver.exe");
+		  System.setProperty("webdriver.chrome.driver", "D:/Descargas/Vates/chromedriver.exe");
 		  Reporter.log("Abro Browser");
 		  driver = new ChromeDriver();
 		  break;
@@ -30,7 +30,7 @@ public class DriverFactory {
 	  }
 	  case FIREFOX:
 	  {
-		  System.setProperty("webdriver.firefox.driver", "D:/Instalaciones//geckodriver-v0.31.0-win64/geckodriver.exe");
+		  System.setProperty("webdriver.firefox.driver", "D:/Instalaciones/geckodriver-v0.31.0-win64/geckodriver.exe");
 		  Reporter.log("Abro Browser");
 		  driver = new FirefoxDriver();
 		  break;

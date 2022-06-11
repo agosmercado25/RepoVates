@@ -2,32 +2,42 @@ package com.selenium.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
 public class DespegarPrincipalPage {
-  @FindBy(css = "a. lgpd-banner--button")
-  private WebElement cookies;
+	
+	private WebDriver driver = null;
+	WebDriverWait wait = null;
+	
+	@FindBy(css = "a.lgpd-banner--button")
+	private WebElement cookies;
+	  
+//	@FindBy(xpath = "//i[@class='login-incentive--close shifu-3-icon-close -eva-3-mr-md']")
+//	private WebElement btnIniciarSesion;
+	  
+	@FindBy(css = ".header-products-container [href='//www.despegar.com.ar/hoteles/']")
+	private WebElement alojamiento;
   
-  @FindBy(xpath = "//i[@class='login-incentive--close shifu-3-icon-close -eva-3-mr-md']")
-  private WebElement btnIniciarSesion;
-  
-  @FindBy(css = "div.header-products-container>ul>li>a[title ='Alojamientos']")
-  private WebElement alojamiento;
-  
-  private WebDriver driver = null;
-  
-  public DespegarPrincipalPage(WebDriver driver) {
+	public DespegarPrincipalPage(WebDriver driver) {
+	  	this.driver = driver;
 		PageFactory.initElements(driver, this);
+		this.wait = new WebDriverWait(driver, 5);
 	}
-
+  
 	public boolean DespegarVisible() {
 		return this.alojamiento.isDisplayed();
 	}
 	 
 	public DespegarAlojamientoPage iraAlojamiento() {
-		btnIniciarSesion.click();
+		wait.until(ExpectedConditions.elementToBeClickable(alojamiento));
+		Assert.assertTrue(alojamiento.isDisplayed(),"Error! No accede a la pagina");
+//		btnIniciarSesion.click();
+		wait.until(ExpectedConditions.elementToBeClickable(cookies));
 		cookies.click();
 		alojamiento.click();
 		return new DespegarAlojamientoPage(this.driver);

@@ -4,7 +4,7 @@
 <parameter name="Navegador" value="EDGE"></parameter>
   <test thread-count="5" name="Test">
     <classes>
-      <class name="com.selenium.test.DespegarTests1"/>
+      <class name="com.selenium.test.WikiTest1"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
